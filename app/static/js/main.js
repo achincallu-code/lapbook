@@ -65,22 +65,9 @@ let progressStorageMessage = "";
 let transitionTimer;
 let transitionHandler;
 const activePointers = new Map();
-let gestureMode = null;
-let dragStartX = 0;
-let dragStartY = 0;
-let rotationStartX = 0;
-let rotationStartY = 0;
 let pinchStartDistance = 0;
 let pinchStartZoom = 1;
 let detailsScrollGesture = null;
-
-function setBookRotation(x, y) {
-  const maxAngle = window.matchMedia("(max-width: 760px)").matches ? 9 : 18;
-  const rotateX = Math.max(-maxAngle, Math.min(maxAngle, x));
-  const rotateY = Math.max(-maxAngle, Math.min(maxAngle, y));
-  book.style.setProperty("--book-rotate-x", `${rotateX}deg`);
-  book.style.setProperty("--book-rotate-y", `${rotateY}deg`);
-}
 
 function pointerDistance(first, second) {
   return Math.hypot(first.x - second.x, first.y - second.y);
@@ -111,25 +98,6 @@ function setBookZoom(zoom) {
   }
 }
 
-function startRotationGesture() {
-  if (activePointers.size === 1) {
-    gestureMode = "rotate";
-    const [pointer] = activePointers.values();
-    dragStartX = pointer.x;
-    dragStartY = pointer.y;
-    rotationStartX = Number.parseFloat(book.style.getPropertyValue("--book-rotate-y")) || 0;
-    rotationStartY = Number.parseFloat(book.style.getPropertyValue("--book-rotate-x")) || 0;
-    return;
-  }
-
-  if (activePointers.size === 2) {
-    gestureMode = "zoom";
-    const [first, second] = activePointers.values();
-    pinchStartDistance = pointerDistance(first, second);
-    pinchStartZoom = getBookZoom();
-  }
-}
-
 book.addEventListener("pointerdown", (event) => {
   const details = event.target.closest(".card-details");
   if (details) {
@@ -149,14 +117,17 @@ book.addEventListener("pointerdown", (event) => {
     return;
   }
 
-  if (activePointers.size === 2) {
+  if (activePointers.size >= 2) {
     return;
   }
 
   book.setPointerCapture(event.pointerId);
   activePointers.set(event.pointerId, { x: event.clientX, y: event.clientY });
-  startRotationGesture();
-  book.classList.add("is-dragging");
+  if (activePointers.size === 2) {
+    const [first, second] = activePointers.values();
+    pinchStartDistance = pointerDistance(first, second);
+    pinchStartZoom = getBookZoom();
+  }
 });
 
 book.addEventListener("pointermove", (event) => {
@@ -172,16 +143,9 @@ book.addEventListener("pointermove", (event) => {
 
   activePointers.set(event.pointerId, { x: event.clientX, y: event.clientY });
 
-  if (gestureMode === "zoom" && activePointers.size === 2) {
+  if (activePointers.size === 2 && pinchStartDistance > 0) {
     const [first, second] = activePointers.values();
-    if (pinchStartDistance > 0) {
-      setBookZoom(pinchStartZoom * pointerDistance(first, second) / pinchStartDistance);
-    }
-  } else if (gestureMode === "rotate" && activePointers.size === 1) {
-    setBookRotation(
-      rotationStartY - (event.clientY - dragStartY) * 0.35,
-      rotationStartX + (event.clientX - dragStartX) * 0.35,
-    );
+    setBookZoom(pinchStartZoom * pointerDistance(first, second) / pinchStartDistance);
   }
 });
 
@@ -196,46 +160,15 @@ function finishBookGesture(event) {
   }
 
   activePointers.delete(event.pointerId);
-  if (activePointers.size === 1) {
-    startRotationGesture();
-    return;
-  }
-
-  gestureMode = null;
-  book.classList.remove("is-dragging");
+  pinchStartDistance = 0;
 }
 
 book.addEventListener("pointerup", finishBookGesture);
 book.addEventListener("pointercancel", finishBookGesture);
 
-book.addEventListener("keydown", (event) => {
-  if (event.target !== book) {
-    return;
-  }
-
-  const rotateX = Number.parseFloat(book.style.getPropertyValue("--book-rotate-x")) || 0;
-  const rotateY = Number.parseFloat(book.style.getPropertyValue("--book-rotate-y")) || 0;
-  const step = event.shiftKey ? 5 : 2;
-  const directions = {
-    ArrowUp: [rotateX + step, rotateY],
-    ArrowDown: [rotateX - step, rotateY],
-    ArrowLeft: [rotateX, rotateY - step],
-    ArrowRight: [rotateX, rotateY + step],
-  };
-  const direction = directions[event.key];
-
-  if (direction) {
-    event.preventDefault();
-    setBookRotation(...direction);
-  }
-});
-
 resetViewButton.addEventListener("click", () => {
-  setBookRotation(0, 0);
   setBookZoom(1);
 });
-
-setBookRotation(5, -6);
 
 function fitBookToViewport() {
   if (usesCompactBookLayout()) {
@@ -257,10 +190,6 @@ function fitBookToViewport() {
     book.style.removeProperty("left");
   }
 
-  setBookRotation(
-    Number.parseFloat(book.style.getPropertyValue("--book-rotate-x")) || 0,
-    Number.parseFloat(book.style.getPropertyValue("--book-rotate-y")) || 0,
-  );
 }
 
 fitBookToViewport();

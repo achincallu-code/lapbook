@@ -558,23 +558,15 @@ body {
   .brand { font-size: 8px; }
 }
 
-.book-wrap { perspective: 1500px; }
+.book-wrap { perspective: none; }
 .book {
-  cursor: grab;
+  cursor: default;
   touch-action: none;
-  transform: scale(var(--book-zoom, 1)) rotateX(var(--book-rotate-x, 0deg)) rotateY(var(--book-rotate-y, 0deg));
-  transform-style: preserve-3d;
-  animation: book-float 6s ease-in-out infinite;
+  transform: scale(var(--book-zoom, 1));
   transition: transform 220ms ease-out, min-height .9s cubic-bezier(.2,.72,.25,1);
 }
-.book:active { cursor: grabbing; }
-.book.is-dragging { animation: none; transition: none; }
-@keyframes book-float {
-  0%, 100% { filter: drop-shadow(0 20px 24px rgba(22, 42, 48, .2)); }
-  50% { filter: drop-shadow(0 29px 32px rgba(22, 42, 48, .14)); }
-}
 .view-controls { display: flex; align-items: center; justify-content: center; gap: 12px; padding-top: 12px; }
-.book:focus-visible, .reset-view-button:focus-visible { outline: 3px solid #e0a843; outline-offset: 3px; }
+.reset-view-button:focus-visible { outline: 3px solid #e0a843; outline-offset: 3px; }
 .reset-view-button {
   min-height: 36px;
   padding: 8px 12px;
@@ -591,7 +583,7 @@ body {
 
 @media (max-width: 760px) {
   .book-wrap { overflow: auto; }
-  .book { transform: scale(calc(var(--book-scale, 1) * var(--book-zoom, 1))) rotateX(var(--book-rotate-x, 0deg)) rotateY(var(--book-rotate-y, 0deg)); }
+  .book { transform: scale(calc(var(--book-scale, 1) * var(--book-zoom, 1))); }
   .view-controls { gap: 8px; padding-top: 8px; }
 }
 
@@ -618,7 +610,7 @@ body {
     width: 920px;
     height: 650px;
     min-height: 650px;
-    transform: scale(calc(var(--book-scale, 1) * var(--book-zoom, 1))) rotateX(var(--book-rotate-x, 0deg)) rotateY(var(--book-rotate-y, 0deg));
+    transform: scale(calc(var(--book-scale, 1) * var(--book-zoom, 1)));
     transform-origin: top left;
   }
   .book.is-opening, .book.is-open, .book.is-closing, .book-inside { min-height: 650px; }
@@ -628,5 +620,4 @@ body {
 
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { scroll-behavior: auto !important; transition-duration: .01ms !important; animation-duration: .01ms !important; }
-  .book { animation: none; }
 }
