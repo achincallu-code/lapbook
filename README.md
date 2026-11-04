@@ -1,6 +1,6 @@
 # Lapbook — Fundamentos de desarrollo web
 
-Lapbook educativa diseñada como un libro desplegable. La portada abre una vista interior con tarjetas plegables sobre etiquetas HTML, Jinja2, propiedades CSS y comandos SQL.
+Lapbook educativa diseñada como un libro desplegable con una estética de cuaderno de hojas rayadas, notas de colores y detalles dibujados. La portada abre una vista interior con tarjetas plegables sobre etiquetas HTML, Jinja2, propiedades CSS y comandos SQL.
 
 Cada ficha incluye una explicación ampliada, un ejemplo interactivo y un reto con retroalimentación. El avance se guarda localmente en el navegador. La lapbook se mantiene plana y se puede ampliar con los botones +/− (útiles con una mano) o con el gesto de pellizcar; también se puede restablecer el zoom. Incluye un proyecto integrador para personalizar una ficha de estudiante y observar cómo colaboran HTML, Jinja2, CSS y SQL; la vista previa funciona localmente y no consulta una base de datos.
 
