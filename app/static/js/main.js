@@ -7,6 +7,9 @@ const bookState = document.querySelector("#book-state");
 const cards = [...document.querySelectorAll("[data-card]")];
 const coverLeft = bookCover.querySelector(".cover-left");
 const resetViewButton = document.querySelector("#reset-view");
+const zoomInButton = document.querySelector("#zoom-in");
+const zoomOutButton = document.querySelector("#zoom-out");
+const zoomLevel = document.querySelector("#zoom-level");
 const learningDialog = document.querySelector("#learning-dialog");
 const learningTitle = document.querySelector("#learning-title");
 const learningExplanation = document.querySelector("#learning-explanation");
@@ -88,6 +91,10 @@ function usesCompactBookLayout() {
 function setBookZoom(zoom) {
   const clampedZoom = Math.max(1, Math.min(2.5, zoom));
   book.style.setProperty("--book-zoom", String(clampedZoom));
+  zoomLevel.value = `${Math.round(clampedZoom * 100)}%`;
+  zoomLevel.textContent = zoomLevel.value;
+  zoomOutButton.disabled = clampedZoom <= 1;
+  zoomInButton.disabled = clampedZoom >= 2.5;
   if (usesCompactBookLayout()) {
     const scale = Number.parseFloat(book.parentElement.style.getPropertyValue("--book-scale")) || 1;
     const bookHeight = window.matchMedia("(max-width: 760px)").matches ? 620 : 650;
@@ -169,6 +176,9 @@ book.addEventListener("pointercancel", finishBookGesture);
 resetViewButton.addEventListener("click", () => {
   setBookZoom(1);
 });
+zoomInButton.addEventListener("click", () => setBookZoom(getBookZoom() + 0.2));
+zoomOutButton.addEventListener("click", () => setBookZoom(getBookZoom() - 0.2));
+setBookZoom(1);
 
 function fitBookToViewport() {
   if (usesCompactBookLayout()) {

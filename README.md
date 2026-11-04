@@ -2,7 +2,7 @@
 
 Lapbook educativa diseñada como un libro desplegable. La portada abre una vista interior con tarjetas plegables sobre etiquetas HTML, Jinja2, propiedades CSS y comandos SQL.
 
-Cada ficha incluye una explicación ampliada, un ejemplo interactivo y un reto con retroalimentación. El avance se guarda localmente en el navegador. La lapbook se mantiene plana y puede ampliarse con el gesto de pellizcar; el botón permite restablecer el zoom. También incluye un proyecto integrador para personalizar una ficha de estudiante y observar cómo colaboran HTML, Jinja2, CSS y SQL; la vista previa funciona localmente y no consulta una base de datos.
+Cada ficha incluye una explicación ampliada, un ejemplo interactivo y un reto con retroalimentación. El avance se guarda localmente en el navegador. La lapbook se mantiene plana y se puede ampliar con los botones +/− (útiles con una mano) o con el gesto de pellizcar; también se puede restablecer el zoom. Incluye un proyecto integrador para personalizar una ficha de estudiante y observar cómo colaboran HTML, Jinja2, CSS y SQL; la vista previa funciona localmente y no consulta una base de datos.
 
 ## Ejecutar
 

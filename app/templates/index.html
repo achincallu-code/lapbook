@@ -169,9 +169,12 @@
           </aside>
         </section>
       </div>
-      <div class="book-caption"><span><i></i> <span id="book-state">PORTADA CERRADA</span></span><span>USA DOS DEDOS PARA AMPLIAR · RESTABLECE EL ZOOM CUANDO QUIERAS</span></div>
-      <div class="view-controls">
+      <div class="book-caption"><span><i></i> <span id="book-state">PORTADA CERRADA</span></span><span>PULSA + / − O USA DOS DEDOS PARA AJUSTAR EL ZOOM</span></div>
+      <div class="view-controls" role="group" aria-label="Controles de zoom de la lapbook">
+        <button type="button" class="zoom-step-button" id="zoom-out" aria-label="Alejar lapbook" title="Alejar">&minus;</button>
+        <output class="zoom-level" id="zoom-level" aria-live="polite">100%</output>
         <button type="button" class="reset-view-button" id="reset-view">RESTABLECER ZOOM</button>
+        <button type="button" class="zoom-step-button" id="zoom-in" aria-label="Acercar lapbook" title="Acercar">+</button>
       </div>
     </section>
 
@@ -264,7 +267,7 @@
         <li><span>02</span><p><strong>Elige un tema:</strong> HTML y sus etiquetas, Jinja2, CSS y sus propiedades, o SQL y sus comandos.</p></li>
         <li><span>03</span><p><strong>Abre una tarjeta</strong> para leer una explicación ampliada y ejemplos.</p></li>
         <li><span>04</span><p><strong>Experimenta y responde el reto.</strong> Al acertar, el tema se marca como aprendido; también puedes marcarlo desde su ficha.</p></li>
-        <li><span>05</span><p><strong>Amplía la lapbook:</strong> junta o separa dos dedos sobre ella para acercar o alejar; pulsa «Restablecer zoom» para volver al tamaño inicial.</p></li>
+        <li><span>05</span><p><strong>Amplía la lapbook:</strong> pulsa + o − para ajustar el tamaño con una mano, o junta/separa dos dedos; usa «Restablecer zoom» para volver al tamaño inicial.</p></li>
         <li><span>06</span><p><strong>Consulta tu avance:</strong> se guarda en este navegador. Puedes reiniciarlo con el botón de progreso.</p></li>
       </ol>
       <section class="learning-progress" aria-label="Progreso de aprendizaje">
