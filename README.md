@@ -12,11 +12,20 @@ Cada ficha incluye una explicación ampliada, un ejemplo interactivo y un reto c
 4. Inicia la aplicación: `python main.py`
 5. Abre `http://127.0.0.1:5000` en el navegador.
 
+## Publicar en Render
+
+1. Sube este proyecto a un repositorio de GitHub.
+2. En Render, crea un **Blueprint** y conecta ese repositorio; Render detectará `render.yaml`.
+3. Confirma la creación del servicio web y espera a que termine el despliegue.
+
+El Blueprint instala las dependencias de `requirements.txt` y ejecuta `gunicorn main:app`. No se necesita una base de datos ni configurar variables de entorno para esta aplicación.
+
 ## Estructura
 
 ```text
 lapbook/
 ├── main.py
+├── render.yaml
 ├── requirements.txt
 └── app/
     ├── __init__.py
