@@ -1,0 +1,291 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#07142d">
+  <meta name="description" content="Lapbook interactiva para aprender HTML, etiquetas, Jinja2, propiedades CSS y comandos SQL.">
+  <title>Lapbook — HTML, Jinja2, CSS y SQL</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;600;700;800&family=DM+Mono:wght@400;500&family=Nunito:wght@500;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+  <script src="{{ url_for('static', filename='js/main.js') }}" defer></script>
+</head>
+<body>
+  <main class="page-shell">
+    <header class="topbar">
+      <a class="brand" href="{{ url_for('index') }}"><span class="brand-mark">&lt;/&gt;</span> MI LAPBOOK <span class="brand-divider">/</span> DESARROLLO WEB</a>
+      <span class="topbar-note"><i></i> HECHA PARA EXPLORAR</span>
+    </header>
+
+    <section class="book-wrap" aria-label="Lapbook interactiva sobre desarrollo web">
+      <div class="book" id="lapbook" tabindex="0" aria-label="Lapbook 3D. Arrastra para girar; usa las flechas del teclado para ajustar la vista.">
+        <section class="book-cover" aria-label="Portada de la lapbook">
+          <div class="cover-panel cover-left">
+            <span class="cover-doodle code-doodle" aria-hidden="true">&lt;/&gt;</span>
+            <button type="button" class="cover-tab tab-orange" data-topic="html" data-go-to="html">HTML</button>
+            <button type="button" class="cover-tab tab-violet" data-topic="jinja" data-go-to="jinja">Jinja2</button>
+            <button type="button" class="cover-tab tab-green" data-topic="css" data-go-to="css">CSS</button>
+            <span class="circuit circuit-left" aria-hidden="true"></span>
+            <span class="cover-back cover-back-left" aria-hidden="true">HTML · JINJA2 · CSS</span>
+          </div>
+          <div class="cover-panel cover-center">
+            <span class="cover-doodle globe-doodle" aria-hidden="true">◎</span>
+            <p class="cover-kicker">CUADERNO INTERACTIVO</p>
+            <h1>LAPBOOK</h1>
+            <p class="cover-subtitle">HTML, CSS,<br>Jinja2 y SQL</p>
+            <img class="cover-illustration" src="{{ url_for('static', filename='images/web-studio.svg') }}" alt="" aria-hidden="true">
+            <button type="button" class="open-book-button" id="open-book" aria-expanded="false" aria-controls="book-inside">
+              ABRIR LAPBOOK <span aria-hidden="true">↗</span>
+            </button>
+            <span class="cover-back cover-back-center" aria-hidden="true">¡DESCUBRE EL INTERIOR!</span>
+          </div>
+          <div class="cover-panel cover-right">
+            <span class="cover-doodle network-doodle" aria-hidden="true">✳</span>
+            <button type="button" class="cover-tab tab-yellow" data-topic="css" data-go-to="css-properties">Propiedades CSS</button>
+            <button type="button" class="cover-tab tab-pink" data-topic="sql" data-go-to="sql">SQL</button>
+            <span class="cover-message">¡Aprende,<br>explora y<br>desarrolla!</span>
+            <span class="circuit circuit-right" aria-hidden="true"></span>
+            <span class="cover-back cover-back-right" aria-hidden="true">CSS · PROPIEDADES · SQL</span>
+          </div>
+        </section>
+
+        <section class="book-inside" id="book-inside" aria-label="Interior de la lapbook" aria-hidden="true">
+          <div class="inside-panel panel-left">
+            <article class="topic-card card-html" id="topic-html" data-card>
+              <button class="card-flap" type="button" aria-expanded="false" aria-controls="details-html">
+                <span class="card-question">¿QUÉ ES?</span><span class="card-title">HTML</span><span class="card-icon html-icon" aria-hidden="true">5</span>
+                <span class="card-teaser">El lenguaje base para estructurar el contenido.</span>
+                <span class="card-hint">TOCA PARA ABRIR <b>⌄</b></span>
+              </button>
+              <div class="card-details" id="details-html" aria-hidden="true" inert>
+                <h3>¿Qué es HTML?</h3>
+                <p class="card-definition">HTML es el lenguaje de marcado que organiza el contenido de una página. Sus etiquetas indican al navegador qué es un título, texto, enlace o imagen; no es un lenguaje de programación.</p>
+                <h4>Etiquetas principales</h4>
+                <ul>
+                  <li><code>&lt;html&gt;</code> raíz del documento</li><li><code>&lt;head&gt;</code> metadatos</li>
+                  <li><code>&lt;body&gt;</code> contenido visible</li><li><code>&lt;h1&gt;</code> título principal</li>
+                  <li><code>&lt;p&gt;</code> párrafo</li><li><code>&lt;a&gt;</code> enlace; usa <code>href</code></li>
+                  <li><code>&lt;img&gt;</code> imagen; usa <code>src</code> y <code>alt</code></li><li><code>&lt;div&gt;</code> contenedor</li>
+                </ul>
+                <p class="mini-tip">Los atributos agregan información a una etiqueta, por ejemplo <code>href</code>. Muchas etiquetas se abren y cierran: <code>&lt;p&gt;texto&lt;/p&gt;</code>.</p>
+              </div>
+            </article>
+            <article class="topic-card card-jinja" id="topic-jinja" data-card>
+              <button class="card-flap" type="button" aria-expanded="false" aria-controls="details-jinja">
+                <span class="card-question">¿QUÉ ES?</span><span class="card-title">Jinja2</span><span class="card-icon gear-icon" aria-hidden="true">⚙</span>
+                <span class="card-teaser">Un motor de plantillas que combina HTML con datos y contenido dinámico.</span>
+                <span class="card-hint">TOCA PARA ABRIR <b>⌄</b></span>
+              </button>
+              <div class="card-details" id="details-jinja" aria-hidden="true" inert>
+                <h3>¿Qué es Jinja2?</h3>
+                <p class="card-definition">Jinja2 es un motor de plantillas para Python. Permite generar HTML dinámico al insertar datos, repetir contenido y mostrar partes de una página según ciertas condiciones.</p>
+                <h4>Marcas de plantilla</h4>
+                <ul>
+                  <li><code>{{ "{{ nombre }}" }}</code> muestra una variable</li>
+                  <li><code>{% raw %}{% if %}{% endraw %}</code> condición</li>
+                  <li><code>{% raw %}{% for %}{% endraw %}</code> ciclo</li>
+                  <li><code>{% raw %}{% extends %}{% endraw %}</code> herencia</li>
+                  <li><code>{% raw %}{% block %}{% endraw %}</code> sección reemplazable</li>
+                </ul>
+                <p class="mini-tip">La expresión <code>{{ "{{ nombre }}" }}</code> muestra el valor de una variable.</p>
+              </div>
+            </article>
+          </div>
+
+          <div class="inside-panel panel-middle">
+            <article class="topic-card card-css" id="topic-css" data-card>
+              <button class="card-flap" type="button" aria-expanded="false" aria-controls="details-css">
+                <span class="card-question">¿QUÉ ES?</span><span class="card-title">CSS</span><span class="card-icon css-icon" aria-hidden="true">3</span>
+                <span class="card-teaser">El lenguaje para dar estilo y diseño a nuestras páginas.</span>
+                <span class="card-hint">TOCA PARA ABRIR <b>⌄</b></span>
+              </button>
+              <div class="card-details" id="details-css" aria-hidden="true" inert>
+                <h3>¿Qué es CSS?</h3>
+                <p class="card-definition">CSS significa hojas de estilo en cascada. Describe cómo se presenta el HTML: colores, tamaños, espacios y distribución. El navegador aplica sus reglas a los elementos seleccionados.</p>
+                <ul>
+                  <li><strong>Selector:</strong> elige los elementos</li>
+                  <li><strong>Propiedad:</strong> indica qué cambiar</li>
+                  <li><strong>Valor:</strong> define el nuevo estilo</li>
+                </ul>
+                <p class="mini-tip">CSS no usa atributos: <code>color</code> y <code>margin</code> son propiedades.</p>
+              </div>
+            </article>
+            <article class="topic-card card-css-properties" id="topic-css-properties" data-card>
+              <button class="card-flap" type="button" aria-expanded="false" aria-controls="details-css-properties">
+                <span class="card-question">¿CÓMO SE ESTILIZA?</span><span class="card-title">CSS</span><span class="card-icon css-properties-icon" aria-hidden="true">{ }</span>
+                <span class="card-teaser">Propiedades comunes para personalizar una página.</span>
+                <span class="card-hint">TOCA PARA ABRIR <b>⌄</b></span>
+              </button>
+              <div class="card-details" id="details-css-properties" aria-hidden="true" inert>
+                <h3>Propiedades comunes</h3>
+                <p class="card-definition">Una propiedad CSS controla un aspecto visual del elemento. Se escribe dentro de una regla, seguida de dos puntos y del valor que quieres aplicar.</p>
+                <ul>
+                  <li><code>color</code> color del texto</li>
+                  <li><code>font-size</code> tamaño de letra</li>
+                  <li><code>background-color</code> color de fondo</li>
+                  <li><code>margin</code> espacio exterior</li>
+                  <li><code>padding</code> espacio interior</li>
+                  <li><code>border</code> borde del elemento</li>
+                </ul>
+                <p class="mini-tip"><code>p { color: teal; }</code><br>El selector <code>p</code> recibe la propiedad <code>color</code>.</p>
+              </div>
+            </article>
+          </div>
+
+          <div class="inside-panel panel-data">
+            <article class="topic-card card-sql" id="topic-sql" data-card>
+              <button class="card-flap" type="button" aria-expanded="false" aria-controls="details-sql">
+                <span class="card-question">¿QUÉ ES?</span><span class="card-title">SQL</span><span class="card-icon database-icon" aria-hidden="true">▤</span>
+                <span class="card-teaser">Un lenguaje para gestionar bases de datos.</span>
+                <span class="card-hint">TOCA PARA ABRIR <b>⌄</b></span>
+              </button>
+              <div class="card-details" id="details-sql" aria-hidden="true" inert>
+                <h3>¿Qué es SQL?</h3>
+                <p class="card-definition">SQL es un lenguaje para consultar y administrar bases de datos relacionales, donde la información se organiza en tablas. Sus comandos permiten buscar, agregar, modificar y estructurar datos.</p>
+                <h4>Comandos principales</h4>
+                <ul>
+                  <li><code>SELECT</code> consulta</li><li><code>INSERT</code> agrega filas</li>
+                  <li><code>UPDATE</code> modifica datos</li><li><code>DELETE</code> elimina filas</li>
+                  <li><code>CREATE</code> crea objetos</li><li><code>ALTER</code> cambia tablas</li>
+                  <li><code>DROP</code> elimina objetos</li><li><code>WHERE</code> filtra resultados</li>
+                </ul>
+                <p class="mini-tip"><code>SELECT nombre FROM alumnos;</code><br>Usa <code>WHERE</code> al actualizar o borrar.</p>
+              </div>
+            </article>
+          </div>
+
+          <aside class="inside-panel panel-ending">
+            <section class="conclusion-card">
+              <span class="conclusion-kicker">EL ROMPECABEZAS COMPLETO</span>
+              <h2>¿Cómo trabajan juntas?</h2>
+              <p>HTML organiza el contenido con etiquetas. CSS define su apariencia con propiedades. Jinja2 combina plantillas con datos y SQL consulta y organiza la información en bases de datos.</p>
+              <div class="big-idea">¡El desarrollo web<br>tiene un gran futuro!</div>
+              <span class="cursor-doodle" aria-hidden="true">➤</span>
+            </section>
+            <div class="inside-sticker"><span aria-hidden="true">◎</span><strong>APRENDE,<br>CREA Y<br>CODIFICA</strong></div>
+            <button type="button" class="close-book-button" id="close-book">CERRAR LAPBOOK <span aria-hidden="true">↶</span></button>
+          </aside>
+        </section>
+      </div>
+      <div class="book-caption"><span><i></i> <span id="book-state">PORTADA CERRADA</span></span><span>ARRASTRA LA LAPBOOK PARA GIRAR · USA DOS DEDOS PARA AMPLIAR</span></div>
+      <div class="view-controls">
+        <button type="button" class="reset-view-button" id="reset-view">RESTABLECER VISTA</button>
+      </div>
+    </section>
+
+    <dialog class="learning-dialog" id="learning-dialog" aria-labelledby="learning-title">
+      <header class="learning-dialog-header">
+        <div>
+          <span class="quick-guide-kicker">FICHA INTERACTIVA</span>
+          <h2 id="learning-title">Explora el tema</h2>
+        </div>
+        <button type="button" class="dialog-close" id="close-learning-dialog" aria-label="Cerrar ficha">×</button>
+      </header>
+      <div class="learning-topic-content">
+        <section class="learning-explanation" id="learning-explanation" aria-label="Explicación del tema"></section>
+        <section class="learning-practice" id="learning-practice" aria-label="Ejemplo interactivo"></section>
+        <section class="learning-quiz" id="learning-quiz" aria-label="Reto del tema"></section>
+      </div>
+      <footer class="learning-dialog-footer">
+        <p id="learning-save-message" aria-live="polite">El avance se guarda en este navegador.</p>
+        <button type="button" class="mark-learned-button" id="mark-learned">Marcar tema como aprendido</button>
+      </footer>
+    </dialog>
+
+    <dialog class="project-dialog" id="project-dialog" aria-labelledby="project-title">
+      <header class="learning-dialog-header">
+        <div>
+          <span class="quick-guide-kicker">PROYECTO INTEGRADOR</span>
+          <h2 id="project-title">Ficha de estudiante</h2>
+        </div>
+        <button type="button" class="dialog-close" id="close-project" aria-label="Cerrar proyecto">×</button>
+      </header>
+      <div class="project-content">
+        <p class="project-intro">Completa los datos y observa cómo se conectan HTML, Jinja2, CSS y SQL en una ficha pequeña.</p>
+        <div class="project-workspace">
+          <section class="project-editor" aria-label="Datos y estilo de la ficha">
+            <label class="practice-field" for="student-name">Nombre del estudiante
+              <input id="student-name" type="text" maxlength="40" value="Alex Rivera">
+            </label>
+            <label class="practice-field" for="student-topic">Tema favorito
+              <select id="student-topic">
+                <option>HTML</option><option>Jinja2</option><option>CSS</option><option>SQL</option>
+              </select>
+            </label>
+            <label class="practice-field" for="student-color">Color de la ficha
+              <select id="student-color">
+                <option value="#287c83">Verde azulado</option>
+                <option value="#c35f48">Coral</option>
+                <option value="#725589">Violeta</option>
+              </select>
+            </label>
+          </section>
+          <section class="project-result" aria-label="Vista previa de la ficha">
+            <span class="project-result-label">VISTA PREVIA · HTML + CSS</span>
+            <article class="student-preview" id="student-preview">
+              <span class="student-preview-icon" aria-hidden="true">&lt;/&gt;</span>
+              <p>ESTUDIANTE WEB</p>
+              <h3 id="student-preview-name">Alex Rivera</h3>
+              <span>Explorando <strong id="student-preview-topic">HTML</strong></span>
+            </article>
+          </section>
+        </div>
+        <div class="project-code-grid">
+          <section class="project-code-card">
+            <h3>HTML · estructura</h3>
+            <code id="project-html-code"></code>
+          </section>
+          <section class="project-code-card">
+            <h3>Jinja2 · datos dinámicos</h3>
+            <code>{{ "{{ alumno.nombre }}" }} · {{ "{{ alumno.tema }}" }}</code>
+          </section>
+          <section class="project-code-card">
+            <h3>CSS · presentación</h3>
+            <code id="project-css-code"></code>
+          </section>
+          <section class="project-code-card">
+            <h3>SQL · origen de datos</h3>
+            <code>SELECT nombre, tema FROM alumnos WHERE id = ?;</code>
+            <p>El signo <code>?</code> representa un parámetro seguro para buscar el registro.</p>
+          </section>
+        </div>
+      </div>
+    </dialog>
+
+    <aside class="quick-guide" aria-label="Cómo explorar la lapbook">
+      <div class="quick-guide-heading">
+        <span class="quick-guide-kicker">GUÍA RÁPIDA</span>
+        <h2>Cómo usarla y qué puedes hacer</h2>
+      </div>
+      <ol class="guide-steps">
+        <li><span>01</span><p><strong>Abre la portada</strong> y descubre las tarjetas del interior.</p></li>
+        <li><span>02</span><p><strong>Elige un tema:</strong> HTML y sus etiquetas, Jinja2, CSS y sus propiedades, o SQL y sus comandos.</p></li>
+        <li><span>03</span><p><strong>Abre una tarjeta</strong> para leer una explicación ampliada y ejemplos.</p></li>
+        <li><span>04</span><p><strong>Experimenta y responde el reto.</strong> Al acertar, el tema se marca como aprendido; también puedes marcarlo desde su ficha.</p></li>
+        <li><span>05</span><p><strong>Manipula la lapbook:</strong> arrastra para girar, usa dos dedos para ampliar y las flechas del teclado para ajustar la vista. Restablece la vista cuando quieras.</p></li>
+        <li><span>06</span><p><strong>Consulta tu avance:</strong> se guarda en este navegador. Puedes reiniciarlo con el botón de progreso.</p></li>
+      </ol>
+      <section class="learning-progress" aria-label="Progreso de aprendizaje">
+        <div class="progress-copy">
+          <div class="progress-label-row"><span>MI PROGRESO</span><strong id="progress-label">0 de 4 temas aprendidos</strong></div>
+          <progress id="learning-progress" max="4" value="0">0 de 4</progress>
+          <p id="progress-message" aria-live="polite">Explora un tema para comenzar.</p>
+        </div>
+        <button type="button" class="reset-progress-button" id="reset-progress">Reiniciar avance</button>
+      </section>
+      <section class="final-project">
+        <div>
+          <span class="quick-guide-kicker">PON TODO EN PRÁCTICA</span>
+          <h3>Un proyecto, cuatro conceptos</h3>
+          <p>Cambia el nombre, el tema y el color; explora la vista previa y los ejemplos de HTML, Jinja2, CSS y SQL. Es una demostración local, no consulta una base de datos.</p>
+        </div>
+        <button type="button" class="open-project-button" id="open-project">Crear ficha interactiva <span aria-hidden="true">↗</span></button>
+      </section>
+    </aside>
+
+    <footer class="site-footer"><span>HTML · JINJA2 · CSS · SQL</span><span>UN PLIEGUE A LA VEZ <b>✳</b></span></footer>
+  </main>
+</body>
+</html>
